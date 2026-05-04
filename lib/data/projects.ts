@@ -1,4 +1,5 @@
 export type Project = {
+  id: string
   name: string
   year: string
   kind: string
@@ -6,53 +7,61 @@ export type Project = {
   tags: string[]
   live: string | null
   appStore: string | null
-  accent: string
+  playStore: string | null
   label: string
+  featured?: boolean
+  stats?: string
 }
 
 export const projects: Project[] = [
   {
-    name: 'MAAAL',
-    year: '2024',
-    kind: 'fintech',
-    desc: 'arabic-first fintech platform. next.js ssr, cms with 10+ sections, ads system across 12+ placements, 90+ lighthouse seo.',
-    tags: ['next.js', 'ssr', 'cms', 'arabic'],
-    live: 'https://maaal.com',
+    id: "maaal",
+    name: "MAAAL",
+    year: "2025",
+    kind: "Fintech · Web Platform",
+    featured: true,
+    stats: "90+ Lighthouse SEO · 85+ Performance",
+    desc: "High-traffic Arabic financial content platform. Architected CMS with 10+ content sections, built Ads Management System supporting 12+ placements, and delivered enterprise apps for the Riyadh Chamber of Commerce.",
+    tags: ["Next.js", "TypeScript", "SSR", "Arabic RTL", "CMS"],
+    live: "https://maaal.com",
     appStore: null,
-    accent: 'oklch(0.97 0 0)',
-    label: 'maaal.com',
+    playStore: null,
+    label: "capital.maaal.com",
   },
   {
-    name: 'OBM Avancer',
-    year: '2024',
-    kind: 'saas dashboard',
-    desc: 'saas business management dashboard. react + tanstack query, real-time data, ios companion app on the app store.',
-    tags: ['react', 'tanstack query', 'ios'],
-    live: 'https://dev.obm.avancer.ai',
-    appStore: 'https://apps.apple.com/us/app/obm/id6740640541',
-    accent: 'oklch(0.96 0 0)',
-    label: 'dev.obm.avancer.ai',
+    id: "obm",
+    name: "OBM — Avancer AI",
+    year: "2024",
+    kind: "SaaS · Dashboard",
+    desc: "Business management SaaS platform with TanStack Query data-fetching, scalable UI architecture, and a companion React Native app on the App Store.",
+    tags: ["React", "TanStack Query", "SaaS", "React Native"],
+    live: "https://dev.obm.avancer.ai/en",
+    appStore: "https://apps.apple.com/us/app/obm/id6740640541",
+    playStore: null,
+    label: "dev.obm.avancer.ai",
   },
   {
-    name: 'Maqsafy',
-    year: '2023',
-    kind: 'e-commerce',
-    desc: 'e-commerce platform — react web storefront and a react native mobile app shipped to play store + app store.',
-    tags: ['react', 'react native', 'ios', 'android'],
-    live: 'https://maqsafy.com',
-    appStore: null,
-    accent: 'oklch(0.95 0 0)',
-    label: 'maqsafy.com',
+    id: "maqsafy",
+    name: "Maqsafy",
+    year: "2023",
+    kind: "E-commerce · Web + Mobile",
+    desc: "Full e-commerce platform — React web storefront with a shared-codebase React Native mobile app shipped to both Play Store and App Store.",
+    tags: ["React", "React Native", "iOS", "Android"],
+    live: "https://www.maqsafy.com",
+    appStore: "https://apps.apple.com/gb/app/مقصفي/id1493287507",
+    playStore: "https://play.google.com/store/apps/details?id=com.maqsafy&hl=ar",
+    label: "maqsafy.com",
   },
   {
-    name: 'Wasl ERP',
-    year: '2023',
-    kind: 'erp',
-    desc: 'cross-platform erp system. react native build for android, deployed to play store. inventory, invoicing, multi-tenant.',
-    tags: ['react native', 'android', 'erp'],
-    live: 'https://waslerp.com',
+    id: "wasl",
+    name: "Wasl ERP",
+    year: "2023",
+    kind: "ERP · Mobile",
+    desc: "Cross-platform ERP mobile app. Shared React Native codebase delivering inventory, invoicing, and multi-tenant support on Android.",
+    tags: ["React Native", "ERP", "Android"],
+    live: "https://www.waslerp.com",
     appStore: null,
-    accent: 'oklch(0.94 0 0)',
-    label: 'waslerp.com',
+    playStore: "https://play.google.com/store/apps/details?id=com.waslapps&hl=ar",
+    label: "waslerp.com",
   },
 ]

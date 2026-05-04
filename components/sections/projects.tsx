@@ -32,10 +32,7 @@ export function Projects() {
           {projects.map((p, i) => (
             <FadeIn key={p.name} delay={i * 80}>
               <article className="border border-border rounded-[10px] overflow-hidden bg-card flex flex-col transition-all duration-[250ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] hover:border-foreground hover:-translate-y-0.5 h-full">
-                <div
-                  className="aspect-video border-b border-border relative overflow-hidden flex items-center justify-center"
-                  style={{ background: p.accent }}
-                >
+                <div className="aspect-video border-b border-border relative overflow-hidden flex items-center justify-center bg-muted">
                   <span className="text-[13px] text-muted-foreground tracking-[0.04em]">
                     {p.label}
                   </span>
