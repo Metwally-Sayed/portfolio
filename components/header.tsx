@@ -19,7 +19,7 @@ export function Header() {
   const [activeSection, setActiveSection] = useState('')
 
   useEffect(() => {
-    setMounted(true)
+    setMounted(true) // eslint-disable-line react-hooks/set-state-in-effect
   }, [])
 
   useEffect(() => {
