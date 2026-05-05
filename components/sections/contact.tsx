@@ -2,7 +2,8 @@
 
 import { useEffect, useRef } from 'react'
 import { AvailabilityPill } from '@/components/availability-pill'
-import { gsap, ScrollTrigger } from '@/lib/gsap'
+import { gsap } from '@/lib/gsap'
+import { EncryptedText } from '@/components/ui/encrypted-text'
 import {
   Envelope,
   LinkedinLogo,
@@ -43,47 +44,48 @@ export function Contact() {
   const listRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const triggers: ReturnType<typeof ScrollTrigger.create>[] = []
-
-    const words = headingRef.current?.querySelectorAll('.word')
-    if (words && words.length > 0) {
-      const t = ScrollTrigger.create({
-        trigger: headingRef.current,
-        start: 'top 85%',
-        once: true,
-        onEnter: () => {
-          gsap.from(words, {
-            opacity: 0,
-            y: 30,
+    const ctx = gsap.context(() => {
+      const words = headingRef.current?.querySelectorAll('.word')
+      if (words && words.length > 0) {
+        gsap.fromTo(
+          Array.from(words),
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
             stagger: 0.08,
             duration: 0.6,
             ease: 'power3.out',
-          })
-        },
-      })
-      triggers.push(t)
-    }
+            scrollTrigger: {
+              trigger: headingRef.current,
+              start: 'top 85%',
+              once: true,
+            },
+          }
+        )
+      }
 
-    if (listRef.current) {
-      const rows = Array.from(listRef.current.children)
-      const t = ScrollTrigger.create({
-        trigger: listRef.current,
-        start: 'top 85%',
-        once: true,
-        onEnter: () => {
-          gsap.from(rows, {
-            opacity: 0,
-            x: 20,
+      if (listRef.current) {
+        gsap.fromTo(
+          Array.from(listRef.current.children),
+          { opacity: 0, x: 20 },
+          {
+            opacity: 1,
+            x: 0,
             stagger: 0.07,
             duration: 0.5,
             ease: 'power2.out',
-          })
-        },
-      })
-      triggers.push(t)
-    }
+            scrollTrigger: {
+              trigger: listRef.current,
+              start: 'top 85%',
+              once: true,
+            },
+          }
+        )
+      }
+    })
 
-    return () => triggers.forEach((t) => t.kill())
+    return () => ctx.revert()
   }, [])
 
   return (
@@ -93,7 +95,7 @@ export function Contact() {
           <div className="grid grid-cols-2 gap-14 items-start max-[720px]:grid-cols-1 max-[720px]:gap-6">
             <div>
               <div className="text-[11px] tracking-[0.08em] uppercase text-muted-foreground">
-                04 / contact
+                <EncryptedText text="04 / contact" />
               </div>
               <h2
                 ref={headingRef}

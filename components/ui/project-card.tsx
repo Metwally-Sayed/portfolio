@@ -87,13 +87,13 @@ export function ProjectCard({ project }: { project: Project }) {
 
         <div className="flex gap-[14px] mt-4 pt-4 border-t border-border">
           {project.live && (
-            <ProjectLink href={project.live} label="view live ↗" />
+            <ProjectLink href={project.live} label="view live" />
           )}
           {project.appStore && (
-            <ProjectLink href={project.appStore} label="app store ↗" />
+            <ProjectLink href={project.appStore} label="app store" />
           )}
           {project.playStore && (
-            <ProjectLink href={project.playStore} label="play store ↗" />
+            <ProjectLink href={project.playStore} label="play store" />
           )}
         </div>
       </div>

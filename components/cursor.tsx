@@ -14,6 +14,11 @@ export function Cursor() {
     const ring = ringRef.current
     if (!dot || !ring) return
 
+    // Inject cursor:none globally so only the custom cursor shows
+    const style = document.createElement('style')
+    style.textContent = '*, *::before, *::after { cursor: none !important; }'
+    document.head.appendChild(style)
+
     // Hide on mobile
     let hidden = window.innerWidth < 768
 
@@ -70,6 +75,7 @@ export function Cursor() {
     observer.observe(document.body, { childList: true, subtree: true })
 
     return () => {
+      style.remove()
       window.removeEventListener('mousemove', onMouseMove)
       window.removeEventListener('resize', onResize)
       interactiveElements.forEach((el) => {

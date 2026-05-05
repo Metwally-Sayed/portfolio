@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { FadeIn } from '@/components/fade-in'
 import { gsap } from '@/lib/gsap'
+import { EncryptedText } from '@/components/ui/encrypted-text'
 import { stats } from '@/lib/data/skills'
 
 export function About() {
@@ -54,9 +55,11 @@ export function About() {
             <div className="flex items-baseline justify-between mb-10 gap-4 flex-wrap">
               <div>
                 <div className="text-[11px] tracking-[0.08em] uppercase text-muted-foreground">
-                  01 / about
+                  <EncryptedText text="01 / about" />
                 </div>
-                <h2 className="text-[32px] font-semibold tracking-[-0.02em] mt-0">about</h2>
+                <h2 className="text-[32px] font-semibold tracking-[-0.02em] mt-0">
+                  <EncryptedText text="about" />
+                </h2>
               </div>
             </div>
           </FadeIn>

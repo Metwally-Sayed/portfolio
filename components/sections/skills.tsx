@@ -3,7 +3,8 @@
 import { useEffect, useRef } from 'react'
 import { skillGroups } from '@/lib/data/skills'
 import { FadeIn } from '@/components/fade-in'
-import { gsap, ScrollTrigger } from '@/lib/gsap'
+import { gsap } from '@/lib/gsap'
+import { EncryptedText } from '@/components/ui/encrypted-text'
 
 function Tag({ children }: { children: string }) {
   return (
@@ -21,35 +22,39 @@ export function Skills() {
     if (!containerRef.current) return
 
     const rows = Array.from(containerRef.current.querySelectorAll('.skill-row'))
+    const container = containerRef.current
 
-    const trigger = ScrollTrigger.create({
-      trigger: containerRef.current,
-      start: 'top 85%',
-      once: true,
-      onEnter: () => {
-        // Rows slide in from left
-        gsap.from(rows, {
-          opacity: 0,
-          x: -30,
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        rows,
+        { opacity: 0, x: -30 },
+        {
+          opacity: 1,
+          x: 0,
           stagger: 0.08,
           duration: 0.6,
           ease: 'power3.out',
-        })
-        // Tags in each row fade in after a short delay
-        rows.forEach((row, i) => {
-          const tags = Array.from(row.querySelectorAll('.skill-tag'))
-          gsap.from(tags, {
-            opacity: 0,
+          scrollTrigger: { trigger: container, start: 'top 85%', once: true },
+        }
+      )
+
+      rows.forEach((row, i) => {
+        gsap.fromTo(
+          Array.from(row.querySelectorAll('.skill-tag')),
+          { opacity: 0 },
+          {
+            opacity: 1,
             stagger: 0.04,
             duration: 0.4,
             ease: 'power2.out',
             delay: 0.08 * i + 0.2,
-          })
-        })
-      },
+            scrollTrigger: { trigger: container, start: 'top 85%', once: true },
+          }
+        )
+      })
     })
 
-    return () => trigger.kill()
+    return () => ctx.revert()
   }, [])
 
   return (
@@ -59,9 +64,11 @@ export function Skills() {
           <div className="flex items-baseline justify-between mb-10 gap-4 flex-wrap">
             <div>
               <div className="text-[11px] tracking-[0.08em] uppercase text-muted-foreground">
-                03 / skills
+                <EncryptedText text="03 / skills" />
               </div>
-              <h2 className="text-[32px] font-semibold tracking-[-0.02em] mt-0">stack</h2>
+              <h2 className="text-[32px] font-semibold tracking-[-0.02em] mt-0">
+                <EncryptedText text="stack" />
+              </h2>
             </div>
             <p className="text-muted-foreground text-[13px] max-w-[380px]">
               tools i reach for daily, in roughly that order.

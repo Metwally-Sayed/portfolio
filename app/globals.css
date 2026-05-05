@@ -136,9 +136,6 @@
   body {
     @apply bg-background text-foreground;
     }
-  button:not(:disabled), [role="button"]:not(:disabled) {
-    cursor: pointer;
-    }
   html {
     @apply font-mono;
     scroll-behavior: smooth;
@@ -159,6 +156,14 @@
   @media (hover: none) {
     .cursor-dot, .cursor-ring { display: none; }
   }
+}
+
+/* Hide default cursor globally — custom cursor handles it */
+*, *::before, *::after {
+  cursor: none !important;
+}
+@media (hover: none) {
+  *, *::before, *::after { cursor: auto !important; }
 }
 
 @keyframes blink {

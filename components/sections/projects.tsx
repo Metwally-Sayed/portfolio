@@ -2,9 +2,10 @@
 
 import { useEffect, useRef } from 'react'
 import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr'
-import { gsap, ScrollTrigger } from '@/lib/gsap'
+import { gsap } from '@/lib/gsap'
 import { projects } from '@/lib/data/projects'
 import { ProjectCard } from '@/components/ui/project-card'
+import { EncryptedText } from '@/components/ui/encrypted-text'
 import type { Project } from '@/lib/data/projects'
 
 function Tag({ children }: { children: string }) {
@@ -53,7 +54,7 @@ function FeaturedCard({ project }: { project: Project }) {
                   rel="noreferrer"
                   className="text-[11px] text-foreground inline-flex items-center gap-1 hover:underline underline-offset-4"
                 >
-                  view live ↗ <ArrowUpRight size={12} />
+                  view live <ArrowUpRight size={12} />
                 </a>
               )}
               {project.appStore && (
@@ -63,7 +64,7 @@ function FeaturedCard({ project }: { project: Project }) {
                   rel="noreferrer"
                   className="text-[11px] text-foreground inline-flex items-center gap-1 hover:underline underline-offset-4"
                 >
-                  app store ↗ <ArrowUpRight size={12} />
+                  app store <ArrowUpRight size={12} />
                 </a>
               )}
               {project.playStore && (
@@ -73,7 +74,7 @@ function FeaturedCard({ project }: { project: Project }) {
                   rel="noreferrer"
                   className="text-[11px] text-foreground inline-flex items-center gap-1 hover:underline underline-offset-4"
                 >
-                  play store ↗ <ArrowUpRight size={12} />
+                  play store <ArrowUpRight size={12} />
                 </a>
               )}
             </div>
@@ -109,45 +110,47 @@ export function Projects() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return
-    const triggers: ScrollTrigger[] = []
 
-    // Animate featured card
-    if (featuredRef.current) {
-      const t = ScrollTrigger.create({
-        trigger: featuredRef.current,
-        start: 'top 85%',
-        once: true,
-        onEnter: () =>
-          gsap.from(featuredRef.current, {
-            opacity: 0,
-            y: 40,
+    const ctx = gsap.context(() => {
+      if (featuredRef.current) {
+        gsap.fromTo(
+          featuredRef.current,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
             duration: 0.7,
             ease: 'power3.out',
-          }),
-      })
-      triggers.push(t)
-    }
+            scrollTrigger: {
+              trigger: featuredRef.current,
+              start: 'top 85%',
+              once: true,
+            },
+          }
+        )
+      }
 
-    // Animate grid cards
-    if (gridRef.current) {
-      const cards = Array.from(gridRef.current.children)
-      const t = ScrollTrigger.create({
-        trigger: gridRef.current,
-        start: 'top 85%',
-        once: true,
-        onEnter: () =>
-          gsap.from(cards, {
-            opacity: 0,
-            y: 40,
+      if (gridRef.current) {
+        gsap.fromTo(
+          Array.from(gridRef.current.children),
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
             stagger: 0.1,
             duration: 0.7,
             ease: 'power3.out',
-          }),
-      })
-      triggers.push(t)
-    }
+            scrollTrigger: {
+              trigger: gridRef.current,
+              start: 'top 85%',
+              once: true,
+            },
+          }
+        )
+      }
+    })
 
-    return () => triggers.forEach((t) => t.kill())
+    return () => ctx.revert()
   }, [])
 
   return (
@@ -157,14 +160,14 @@ export function Projects() {
         <div className="flex items-baseline justify-between mb-10 gap-4 flex-wrap">
           <div>
             <div className="text-[11px] tracking-[0.08em] uppercase text-muted-foreground">
-              02 / projects
+              <EncryptedText text="02 / projects" />
             </div>
             <h2 className="text-[32px] font-semibold tracking-[-0.02em] mt-0">
-              selected work
+              <EncryptedText text="selected work" />
             </h2>
           </div>
           <p className="text-muted-foreground text-[13px] max-w-[380px]">
-            four production systems, shipped end-to-end.
+            six production systems, shipped end-to-end.
           </p>
         </div>
 
