@@ -5,6 +5,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Cursor } from "@/components/cursor"
 import { Loader } from "@/components/loader"
+import { PersonJsonLd } from "@/components/person-jsonld"
 import { cn } from "@/lib/utils"
 import { SITE_URL } from "@/lib/site"
 
@@ -48,6 +49,7 @@ export default function RootLayout({
       className={cn("antialiased", fontSans.variable, "font-mono", jetbrainsMono.variable)}
     >
       <body>
+        <PersonJsonLd />
         <ThemeProvider>
           <Loader />
           <Cursor />
