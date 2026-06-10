@@ -4,6 +4,7 @@ import { useTheme } from 'next-themes'
 import { Moon, Sun } from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
 import { ScrollTrigger } from '@/lib/gsap'
+import { DownloadCv } from '@/components/download-cv'
 
 const navItems = [
   { label: 'about', href: '#about' },
@@ -78,6 +79,8 @@ export function Header() {
               </a>
             )
           })}
+
+          <DownloadCv className="text-muted-foreground hover:text-foreground" />
 
           <button
             aria-label="toggle theme"

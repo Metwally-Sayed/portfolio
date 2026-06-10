@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react'
 import { AvailabilityPill } from '@/components/availability-pill'
 import { gsap } from '@/lib/gsap'
 import { EncryptedText } from '@/components/ui/encrypted-text'
+import { DownloadCv } from '@/components/download-cv'
 import {
   Envelope,
   LinkedinLogo,
@@ -150,6 +151,7 @@ export function Contact() {
                 )
               })}
             </div>
+            <DownloadCv className="mt-6" />
           </div>
         </div>
       </section>
