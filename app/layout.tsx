@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Cursor } from "@/components/cursor"
 import { Loader } from "@/components/loader"
 import { cn } from "@/lib/utils"
+import { SITE_URL } from "@/lib/site"
 
 const fontSans = Geist({
   subsets: ["latin"],
@@ -15,6 +16,7 @@ const fontSans = Geist({
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Metwally Sayed — frontend engineer",
   description:
     "senior frontend engineer based in cairo. building fast, accessible web & mobile interfaces with react, next.js and react native.",
@@ -22,7 +24,7 @@ export const metadata: Metadata = {
     title: "Metwally Sayed — frontend engineer",
     description:
       "senior frontend engineer based in cairo. building fast, accessible web & mobile interfaces with react, next.js and react native.",
-    url: "https://metwally-sayed.vercel.app",
+    url: SITE_URL,
     siteName: "Metwally Sayed",
     locale: "en_US",
     type: "website",
