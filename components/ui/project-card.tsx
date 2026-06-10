@@ -1,9 +1,11 @@
 'use client'
 
 import { useRef } from 'react'
+import Link from 'next/link'
 import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr'
 import { gsap } from '@/lib/gsap'
 import type { Project } from '@/lib/data/projects'
+import { getCaseStudy } from '@/lib/data/case-studies'
 
 function Tag({ children }: { children: string }) {
   return (
@@ -60,6 +62,7 @@ function ProjectLink({
 }
 
 export function ProjectCard({ project }: { project: Project }) {
+  const study = getCaseStudy(project.id)
   return (
     <article className="border border-border rounded-[10px] overflow-hidden bg-card flex flex-col transition-all duration-[250ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] hover:border-foreground hover:-translate-y-1 h-full">
       <div className="aspect-video border-b border-border relative overflow-hidden flex items-center justify-center bg-muted">
@@ -86,6 +89,14 @@ export function ProjectCard({ project }: { project: Project }) {
         </div>
 
         <div className="flex gap-[14px] mt-4 pt-4 border-t border-border">
+          {study && (
+            <Link
+              href={`/projects/${project.id}`}
+              className="text-[11px] text-foreground inline-flex items-center gap-1 hover:underline underline-offset-4"
+            >
+              read case study →
+            </Link>
+          )}
           {project.live && (
             <ProjectLink href={project.live} label="view live" />
           )}
