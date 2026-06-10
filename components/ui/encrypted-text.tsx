@@ -26,19 +26,33 @@ export function EncryptedText({
   flipDelayMs = 45,
   holdMs = 300,
 }: Props) {
-  const [display, setDisplay] = useState<string[]>(() => text.split(''))
+  const [display, setDisplay] = useState<string[]>(() =>
+    text.split('').map(c => (c === ' ' ? ' ' : rand()))
+  )
   const [revealed, setRevealed] = useState(0)
   const elRef = useRef<HTMLSpanElement>(null)
   const rafRef = useRef(0)
   const doneRef = useRef(false)
+  // Track previous text to detect changes without synchronous setState in effect
+  const prevTextRef = useRef(text)
 
   useEffect(() => {
-    // Scramble on client immediately (prevents hydration mismatch)
-    setDisplay(text.split('').map(c => (c === ' ' ? ' ' : rand())))
-    setRevealed(0)
-
     const el = elRef.current
     if (!el) return
+
+    // If text changed, reset scramble state via a scheduler tick to avoid
+    // synchronous setState in effect body
+    if (prevTextRef.current !== text) {
+      prevTextRef.current = text
+      doneRef.current = false
+      cancelAnimationFrame(rafRef.current)
+      const id = requestAnimationFrame(() => {
+        setDisplay(text.split('').map(c => (c === ' ' ? ' ' : rand())))
+        setRevealed(0)
+      })
+      rafRef.current = id
+      return () => cancelAnimationFrame(id)
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
