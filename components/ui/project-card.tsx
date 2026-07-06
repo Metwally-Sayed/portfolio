@@ -6,6 +6,7 @@ import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr'
 import { gsap } from '@/lib/gsap'
 import type { Project } from '@/lib/data/projects'
 import { getCaseStudy } from '@/lib/data/case-studies'
+import { dict, pick, useLocale } from '@/lib/i18n'
 
 function Tag({ children }: { children: string }) {
   return (
@@ -63,6 +64,8 @@ function ProjectLink({
 
 export function ProjectCard({ project }: { project: Project }) {
   const study = getCaseStudy(project.id)
+  const { locale } = useLocale()
+  const t = dict[locale]
   return (
     <article className="border border-border rounded-[10px] overflow-hidden bg-card flex flex-col transition-all duration-[250ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] hover:border-foreground hover:-translate-y-1 h-full">
       <div className="aspect-video border-b border-border relative overflow-hidden flex items-center justify-center bg-muted">
@@ -73,13 +76,13 @@ export function ProjectCard({ project }: { project: Project }) {
 
       <div className="p-5 flex flex-col flex-1">
         <div className="text-[10px] text-muted-foreground tracking-[0.06em] uppercase">
-          {project.year} / {project.kind}
+          {project.year} / {pick(locale, project.kind, project.kindAr)}
         </div>
         <div className="text-[22px] font-semibold mt-[6px] tracking-[-0.01em]">
           {project.name}
         </div>
         <div className="text-[13px] text-muted-foreground leading-[1.65] mt-[10px] flex-1">
-          {project.desc}
+          {pick(locale, project.desc, project.descAr)}
         </div>
 
         <div className="flex gap-[6px] flex-wrap mt-4">
@@ -94,17 +97,17 @@ export function ProjectCard({ project }: { project: Project }) {
               href={`/projects/${project.id}`}
               className="text-[11px] text-foreground inline-flex items-center gap-1 hover:underline underline-offset-4"
             >
-              read case study →
+              {t.projects.readCase}
             </Link>
           )}
           {project.live && (
-            <ProjectLink href={project.live} label="view live" />
+            <ProjectLink href={project.live} label={t.projects.viewLive} />
           )}
           {project.appStore && (
-            <ProjectLink href={project.appStore} label="app store" />
+            <ProjectLink href={project.appStore} label={t.projects.appStore} />
           )}
           {project.playStore && (
-            <ProjectLink href={project.playStore} label="play store" />
+            <ProjectLink href={project.playStore} label={t.projects.playStore} />
           )}
         </div>
       </div>

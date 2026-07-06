@@ -7,6 +7,7 @@ import { projects } from '@/lib/data/projects'
 import { ProjectCard } from '@/components/ui/project-card'
 import { EncryptedText } from '@/components/ui/encrypted-text'
 import type { Project } from '@/lib/data/projects'
+import { dict, pick, useLocale } from '@/lib/i18n'
 
 function Tag({ children }: { children: string }) {
   return (
@@ -17,6 +18,8 @@ function Tag({ children }: { children: string }) {
 }
 
 function FeaturedCard({ project }: { project: Project }) {
+  const { locale } = useLocale()
+  const t = dict[locale]
   return (
     <article className="group border border-border rounded-[10px] overflow-hidden bg-card mb-4">
       <div className="flex max-[720px]:flex-col">
@@ -24,7 +27,7 @@ function FeaturedCard({ project }: { project: Project }) {
         <div className="flex flex-col justify-between p-7 max-[720px]:p-5" style={{ flex: '0 0 60%' }}>
           <div>
             <div className="text-[10px] text-muted-foreground tracking-[0.06em] uppercase mb-3">
-              {project.year} / {project.kind}
+              {project.year} / {pick(locale, project.kind, project.kindAr)}
             </div>
             <div className="text-[40px] font-semibold tracking-[-0.02em] leading-[1.1]">
               {project.name}
@@ -35,7 +38,7 @@ function FeaturedCard({ project }: { project: Project }) {
               </div>
             )}
             <div className="text-[13px] text-muted-foreground leading-[1.65] mt-4">
-              {project.desc}
+              {pick(locale, project.desc, project.descAr)}
             </div>
           </div>
 
@@ -54,7 +57,7 @@ function FeaturedCard({ project }: { project: Project }) {
                   rel="noreferrer"
                   className="text-[11px] text-foreground inline-flex items-center gap-1 hover:underline underline-offset-4"
                 >
-                  view live <ArrowUpRight size={12} />
+                  {t.projects.viewLive} <ArrowUpRight size={12} />
                 </a>
               )}
               {project.appStore && (
@@ -64,7 +67,7 @@ function FeaturedCard({ project }: { project: Project }) {
                   rel="noreferrer"
                   className="text-[11px] text-foreground inline-flex items-center gap-1 hover:underline underline-offset-4"
                 >
-                  app store <ArrowUpRight size={12} />
+                  {t.projects.appStore} <ArrowUpRight size={12} />
                 </a>
               )}
               {project.playStore && (
@@ -74,7 +77,7 @@ function FeaturedCard({ project }: { project: Project }) {
                   rel="noreferrer"
                   className="text-[11px] text-foreground inline-flex items-center gap-1 hover:underline underline-offset-4"
                 >
-                  play store <ArrowUpRight size={12} />
+                  {t.projects.playStore} <ArrowUpRight size={12} />
                 </a>
               )}
             </div>
@@ -93,7 +96,7 @@ function FeaturedCard({ project }: { project: Project }) {
           </div>
           {/* Featured badge */}
           <span className="absolute top-3 right-3 text-[10px] px-2 py-1 bg-foreground text-background tracking-widest uppercase">
-            Featured
+            {t.projects.featured}
           </span>
         </div>
       </div>
@@ -102,10 +105,12 @@ function FeaturedCard({ project }: { project: Project }) {
 }
 
 export function Projects() {
+  const { locale } = useLocale()
+  const t = dict[locale]
   const featuredRef = useRef<HTMLDivElement>(null)
   const gridRef = useRef<HTMLDivElement>(null)
 
-  const featured = projects.find((p) => p.featured)
+  const featured = projects.filter((p) => p.featured)
   const regular = projects.filter((p) => !p.featured)
 
   useEffect(() => {
@@ -160,23 +165,22 @@ export function Projects() {
         <div className="flex items-baseline justify-between mb-10 gap-4 flex-wrap">
           <div>
             <div className="text-[11px] tracking-[0.08em] uppercase text-muted-foreground">
-              <EncryptedText text="02 / projects" />
+              <EncryptedText text={t.projects.kicker} />
             </div>
             <h2 className="text-[32px] font-semibold tracking-[-0.02em] mt-0">
-              <EncryptedText text="selected work" />
+              <EncryptedText text={t.projects.title} />
             </h2>
           </div>
           <p className="text-muted-foreground text-[13px] max-w-[380px]">
-            six production systems, shipped end-to-end.
+            {t.projects.subtitle}
           </p>
         </div>
 
-        {/* Featured card */}
-        {featured && (
-          <div ref={featuredRef}>
-            <FeaturedCard project={featured} />
-          </div>
-        )}
+        <div ref={featuredRef}>
+          {featured.map((project) => (
+            <FeaturedCard key={project.id} project={project} />
+          ))}
+        </div>
 
         {/* Regular grid */}
         <div

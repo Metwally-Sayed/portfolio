@@ -1,8 +1,9 @@
 import type { Metadata } from "next"
-import { Geist, JetBrains_Mono } from "next/font/google"
+import { Geist, JetBrains_Mono, Cairo } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { LocaleProvider } from "@/lib/i18n"
 import { Cursor } from "@/components/cursor"
 import { Loader } from "@/components/loader"
 import { PersonJsonLd } from "@/components/person-jsonld"
@@ -15,6 +16,8 @@ const fontSans = Geist({
 })
 
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" })
+
+const cairo = Cairo({ subsets: ["arabic"], variable: "--font-arabic" })
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -46,15 +49,17 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("antialiased", fontSans.variable, "font-mono", jetbrainsMono.variable)}
+      className={cn("antialiased", fontSans.variable, "font-mono", jetbrainsMono.variable, cairo.variable)}
     >
       <body>
         <PersonJsonLd />
-        <ThemeProvider>
-          <Loader />
-          <Cursor />
-          {children}
-        </ThemeProvider>
+        <LocaleProvider>
+          <ThemeProvider>
+            <Loader />
+            <Cursor />
+            {children}
+          </ThemeProvider>
+        </LocaleProvider>
       </body>
     </html>
   )

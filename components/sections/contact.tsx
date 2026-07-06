@@ -5,6 +5,7 @@ import { AvailabilityPill } from '@/components/availability-pill'
 import { gsap } from '@/lib/gsap'
 import { EncryptedText } from '@/components/ui/encrypted-text'
 import { DownloadCv } from '@/components/download-cv'
+import { dict, useLocale } from '@/lib/i18n'
 import {
   Envelope,
   LinkedinLogo,
@@ -41,6 +42,8 @@ const contactRows = [
 ]
 
 export function Contact() {
+  const { locale } = useLocale()
+  const t = dict[locale]
   const headingRef = useRef<HTMLHeadingElement>(null)
   const listRef = useRef<HTMLDivElement>(null)
 
@@ -96,13 +99,13 @@ export function Contact() {
           <div className="grid grid-cols-2 gap-14 items-start max-[720px]:grid-cols-1 max-[720px]:gap-6">
             <div>
               <div className="text-[11px] tracking-[0.08em] uppercase text-muted-foreground">
-                <EncryptedText text="04 / contact" />
+                <EncryptedText text={t.contact.kicker} />
               </div>
               <h2
                 ref={headingRef}
                 className="text-[clamp(36px,6vw,64px)] font-semibold tracking-[-0.02em] leading-[1.05] mt-3"
               >
-                {"let's build something.".split(' ').map((word, i) => (
+                {t.contact.heading.split(' ').map((word, i) => (
                   <span key={i} className="word inline-block mr-[0.25em]">
                     {word}
                   </span>
@@ -118,13 +121,15 @@ export function Contact() {
               className="flex flex-col gap-px bg-border border border-border rounded-[10px] overflow-hidden"
             >
               {contactRows.map(({ label, value, href, Icon }) => {
+                const displayLabel = t.contact[label as 'email' | 'linkedin' | 'github' | 'location']
+                const displayValue = label === 'location' ? t.contact.locationValue : value
                 const inner = (
                   <>
                     <Icon size={16} className="flex-none text-foreground" />
                     <span className="text-[10px] text-muted-foreground tracking-[0.06em] uppercase flex-none w-20">
-                      {label}
+                      {displayLabel}
                     </span>
-                    <span className="text-[13px] flex-1 min-w-0 truncate">{value}</span>
+                    <span className="text-[13px] flex-1 min-w-0 truncate">{displayValue}</span>
                     {href && (
                       <ArrowUpRight size={12} className="flex-none text-muted-foreground" />
                     )}
@@ -159,17 +164,17 @@ export function Contact() {
       <footer className="border-t border-border py-8">
         <div className="max-w-[1100px] mx-auto px-6 flex items-center justify-between gap-4 flex-wrap">
           <span className="text-[11px] text-muted-foreground tracking-[0.04em]">
-            © 2026 metwally sayed
+            {t.common.copyright}
           </span>
           <span className="text-[11px] text-muted-foreground tracking-[0.04em]">
-            built with next.js · cairo
+            {t.common.footerBuilt}
           </span>
           <span className="text-[11px] text-muted-foreground tracking-[0.04em]">
-            press{' '}
+            {t.common.footerThemePrefix}{' '}
             <kbd className="px-[6px] py-[1px] border border-border rounded-[4px] font-mono">
               d
             </kbd>{' '}
-            to toggle theme
+            {t.common.footerTheme}
           </span>
         </div>
       </footer>

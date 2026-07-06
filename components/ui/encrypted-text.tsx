@@ -3,9 +3,20 @@
 import { useEffect, useRef, useState } from 'react'
 
 const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*?'
+const AR_CHARS = 'ابتثجحخدذرزسشصضطظعغفقكلمنهوي٠١٢٣٤٥٦٧٨٩'
 
-function rand() {
-  return CHARS[Math.floor(Math.random() * CHARS.length)]
+// scramble Arabic with Arabic glyphs so the reveal doesn't flash Latin gibberish
+function charsetFor(text: string) {
+  return /[؀-ۿ]/.test(text) ? AR_CHARS : CHARS
+}
+
+function rand(chars: string) {
+  return chars[Math.floor(Math.random() * chars.length)]
+}
+
+function initialChar(char: string, index: number, chars: string) {
+  if (char === ' ') return ' '
+  return chars[(char.charCodeAt(0) + index * 17) % chars.length]
 }
 
 interface Props {
@@ -26,33 +37,26 @@ export function EncryptedText({
   flipDelayMs = 45,
   holdMs = 300,
 }: Props) {
+  const chars = charsetFor(text)
   const [display, setDisplay] = useState<string[]>(() =>
-    text.split('').map(c => (c === ' ' ? ' ' : rand()))
+    text.split('').map((c, i) => initialChar(c, i, chars))
   )
   const [revealed, setRevealed] = useState(0)
   const elRef = useRef<HTMLSpanElement>(null)
   const rafRef = useRef(0)
   const doneRef = useRef(false)
-  // Track previous text to detect changes without synchronous setState in effect
-  const prevTextRef = useRef(text)
 
+  // Re-runs whenever `text` changes (e.g. locale toggle): re-scramble, then reveal.
   useEffect(() => {
     const el = elRef.current
     if (!el) return
 
-    // If text changed, reset scramble state via a scheduler tick to avoid
-    // synchronous setState in effect body
-    if (prevTextRef.current !== text) {
-      prevTextRef.current = text
-      doneRef.current = false
-      cancelAnimationFrame(rafRef.current)
-      const id = requestAnimationFrame(() => {
-        setDisplay(text.split('').map(c => (c === ' ' ? ' ' : rand())))
-        setRevealed(0)
-      })
-      rafRef.current = id
-      return () => cancelAnimationFrame(id)
-    }
+    doneRef.current = false
+    // re-scramble on a scheduler tick to avoid a synchronous setState in the effect body
+    const seed = requestAnimationFrame(() => {
+      setDisplay(text.split('').map(c => (c === ' ' ? ' ' : rand(chars))))
+      setRevealed(0)
+    })
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -80,7 +84,7 @@ export function EncryptedText({
               text.split('').map((c, i) => {
                 if (c === ' ') return ' '
                 if (i < revealedCount) return c
-                return rand()
+                return rand(chars)
               })
             )
           }
@@ -102,10 +106,11 @@ export function EncryptedText({
     observer.observe(el)
 
     return () => {
+      cancelAnimationFrame(seed)
       observer.disconnect()
       cancelAnimationFrame(rafRef.current)
     }
-  }, [text, revealDelayMs, flipDelayMs, holdMs])
+  }, [text, chars, revealDelayMs, flipDelayMs, holdMs])
 
   return (
     <span ref={elRef} className={className} aria-label={text}>

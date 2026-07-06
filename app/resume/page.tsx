@@ -39,6 +39,7 @@ export default function ResumePage() {
                 </div>
                 <div className="text-xs text-muted-foreground">{exp.period}</div>
               </div>
+              <div className="text-xs text-muted-foreground mt-1">{exp.location}</div>
               <ul className="mt-3 flex flex-col gap-2">
                 {exp.points.map((p) => (
                   <li key={p} className="text-sm text-muted-foreground leading-[1.65] pl-4 relative">

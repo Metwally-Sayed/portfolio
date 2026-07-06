@@ -5,6 +5,7 @@ import { skillGroups } from '@/lib/data/skills'
 import { FadeIn } from '@/components/fade-in'
 import { gsap } from '@/lib/gsap'
 import { EncryptedText } from '@/components/ui/encrypted-text'
+import { dict, skillGroupAr, useLocale } from '@/lib/i18n'
 
 function Tag({ children }: { children: string }) {
   return (
@@ -15,6 +16,8 @@ function Tag({ children }: { children: string }) {
 }
 
 export function Skills() {
+  const { locale } = useLocale()
+  const t = dict[locale]
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -64,14 +67,14 @@ export function Skills() {
           <div className="flex items-baseline justify-between mb-10 gap-4 flex-wrap">
             <div>
               <div className="text-[11px] tracking-[0.08em] uppercase text-muted-foreground">
-                <EncryptedText text="03 / skills" />
+                <EncryptedText text={t.skills.kicker} />
               </div>
               <h2 className="text-[32px] font-semibold tracking-[-0.02em] mt-0">
-                <EncryptedText text="stack" />
+                <EncryptedText text={t.skills.title} />
               </h2>
             </div>
             <p className="text-muted-foreground text-[13px] max-w-[380px]">
-              tools i reach for daily, in roughly that order.
+              {t.skills.subtitle}
             </p>
           </div>
         </FadeIn>
@@ -80,7 +83,7 @@ export function Skills() {
           {skillGroups.map(([cat, items]) => (
             <div key={cat} className="skill-row grid grid-cols-[200px_1fr] gap-6 py-4 border-t border-border last:border-b last:border-border max-[720px]:grid-cols-1 max-[720px]:gap-2">
               <div className="text-[11px] tracking-[0.06em] text-muted-foreground uppercase pt-1">
-                {cat}
+                {locale === 'ar' ? (skillGroupAr[cat] ?? cat) : cat}
               </div>
               <div className="flex gap-[6px] flex-wrap">
                 {items.map((item) => (

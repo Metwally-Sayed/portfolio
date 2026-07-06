@@ -4,6 +4,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Arabic gets a proper Arabic webfont; the mono stack has no Arabic glyphs */
+[dir="rtl"] body {
+  font-family: var(--font-arabic), "Segoe UI", Tahoma, sans-serif;
+}
+
 @theme inline {
     --font-heading: var(--font-mono);
     --font-mono: var(--font-mono);

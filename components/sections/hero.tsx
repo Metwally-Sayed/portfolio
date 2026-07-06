@@ -4,7 +4,9 @@ import { useEffect, useRef } from 'react'
 import { gsap } from '@/lib/gsap'
 import { AvailabilityPill } from '@/components/availability-pill'
 import { EncryptedText } from '@/components/ui/encrypted-text'
+import { DownloadCv } from '@/components/download-cv'
 import { ArrowRight } from '@phosphor-icons/react/dist/ssr'
+import { dict, useLocale } from '@/lib/i18n'
 
 function handleMagnetMove(e: React.MouseEvent<HTMLAnchorElement>) {
   const el = e.currentTarget
@@ -21,9 +23,10 @@ function handleMagnetLeave(e: React.MouseEvent<HTMLAnchorElement>) {
 const GRAIN = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\")"
 
 export function Hero() {
+  const { locale } = useLocale()
+  const t = dict[locale]
   const sectionRef = useRef<HTMLElement>(null)
   const pillRef = useRef<HTMLSpanElement>(null)
-  const indexRef = useRef<HTMLSpanElement>(null)
   const name1InnerRef = useRef<HTMLDivElement>(null)
   const name2InnerRef = useRef<HTMLDivElement>(null)
   const ruleRef = useRef<HTMLDivElement>(null)
@@ -39,7 +42,6 @@ export function Hero() {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
 
       tl.from(pillRef.current, { opacity: 0, y: 8, duration: 0.4 })
-      tl.from(indexRef.current, { opacity: 0, duration: 0.3 }, '<')
 
       tl.fromTo(name1InnerRef.current, { y: '110%' }, { y: '0%', duration: 0.9 }, '-=0.1')
       tl.fromTo(name2InnerRef.current, { y: '110%' }, { y: '0%', duration: 0.9 }, '-=0.62')
@@ -75,7 +77,7 @@ export function Hero() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="top" className="pt-[130px] pb-24 relative overflow-hidden">
+    <section ref={sectionRef} id="top" className="pt-[130px] pb-24 relative overflow-hidden max-[520px]:pt-20">
 
       <div
         aria-hidden
@@ -91,17 +93,20 @@ export function Hero() {
           </span>
         </div>
 
-        <h1 className="text-[clamp(58px,9vw,112px)] font-semibold tracking-[-0.03em] leading-[0.88] text-foreground">
+        <h1 className="text-[clamp(34px,9.5vw,112px)] font-semibold tracking-[-0.03em] leading-[0.92] text-foreground">
           <div className="overflow-hidden">
             <div ref={name1InnerRef} style={{ transform: 'translateY(110%)' }}>
-              Metwally
+              {t.hero.h1a}
             </div>
           </div>
           <div className="overflow-hidden">
             <div ref={name2InnerRef} style={{ transform: 'translateY(110%)' }}>
-              Sayed
+              {t.hero.h1b}
             </div>
           </div>
+          <span className="block mt-3 text-[clamp(20px,4vw,52px)] leading-[1.08] tracking-[-0.02em]">
+            {t.hero.tagline}
+          </span>
         </h1>
 
         <div
@@ -111,22 +116,23 @@ export function Hero() {
         />
 
         <p ref={roleRef} className="mt-5 text-[10px] tracking-[0.1em] uppercase text-muted-foreground">
-          <EncryptedText text="Senior Frontend Engineer · Cairo, Egypt" revealDelayMs={80} />
+          <EncryptedText text={t.hero.role} revealDelayMs={80} />
         </p>
 
         <p ref={descRef} className="mt-[18px] text-[13px] text-muted-foreground max-w-[480px] leading-[1.65]">
-          i build fast, accessible web &amp; mobile interfaces. three+ years shipping production
-          react, next.js and react native. currently open to remote roles.
+          {t.hero.desc}
         </p>
 
         <div ref={btnsRef} className="mt-7 flex gap-[10px] flex-wrap">
           <a
-            href="#contact"
+            href="https://calendly.com/metwallysayed1999/30min"
+            target="_blank"
+            rel="noreferrer"
             className="inline-flex items-center gap-2 h-9 px-[14px] bg-primary text-primary-foreground text-xs font-medium rounded-none border border-transparent hover:opacity-90 transition-opacity duration-150"
             onMouseMove={handleMagnetMove}
             onMouseLeave={handleMagnetLeave}
           >
-            let&apos;s talk <ArrowRight size={14} />
+            {t.hero.bookCall} <ArrowRight size={14} />
           </a>
           <a
             href="#projects"
@@ -134,7 +140,16 @@ export function Hero() {
             onMouseMove={handleMagnetMove}
             onMouseLeave={handleMagnetLeave}
           >
-            view projects
+            {t.hero.viewWork}
+          </a>
+          <DownloadCv className="h-9 px-[14px] bg-background text-foreground text-xs font-medium rounded-none border border-border hover:bg-muted transition-colors duration-150 no-underline" />
+          <a
+            href="mailto:metwallysayed1999@gmail.com"
+            className="inline-flex items-center gap-2 h-9 px-[14px] bg-background text-foreground text-xs font-medium rounded-none border border-border hover:bg-muted transition-colors duration-150"
+            onMouseMove={handleMagnetMove}
+            onMouseLeave={handleMagnetLeave}
+          >
+            {t.hero.emailMe}
           </a>
         </div>
 

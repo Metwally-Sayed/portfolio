@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
 
 ## Commands
 
@@ -43,4 +43,4 @@ The site is bilingual via a **client-side locale toggle** (no `/ar` routes — d
 - **ScrollTrigger refresh on locale change** (`components/header.tsx`): a locale swap changes text length + swaps in Cairo, shifting every section's scroll position. GSAP ScrollTrigger caches positions, so the header calls `ScrollTrigger.refresh()` on `locale` change **and** on `document.fonts.ready`. Without it, bottom sections (contact) stay stuck at `opacity: 0`.
 - **`EncryptedText` re-runs on text change** (`components/ui/encrypted-text.tsx`): its reveal effect re-arms whenever `text` changes (required for the locale toggle — the old version froze mid-scramble), and it scrambles with an Arabic charset when the text is Arabic.
 
-> `AGENTS.md` is a mirror of this file for Codex — keep the two in sync when editing.
+> `CLAUDE.md` is a mirror of this file for Claude Code — keep the two in sync when editing.
