@@ -4,14 +4,14 @@ import { useEffect, useRef } from 'react'
 import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr'
 import { gsap } from '@/lib/gsap'
 import { projects } from '@/lib/data/projects'
-import { ProjectCard } from '@/components/ui/project-card'
+import { ProjectCard, ProjectPreview } from '@/components/ui/project-card'
 import { EncryptedText } from '@/components/ui/encrypted-text'
 import type { Project } from '@/lib/data/projects'
 import { dict, pick, useLocale } from '@/lib/i18n'
 
 function Tag({ children }: { children: string }) {
   return (
-    <span className="text-[10px] py-[2px] px-[7px] border border-border rounded-[6px] text-muted-foreground font-mono">
+    <span className="text-[10px] py-[2px] px-[7px] border border-border rounded-[6px] text-muted-foreground font-mono transition-colors duration-150 hover:border-foreground hover:text-foreground">
       [{children}]
     </span>
   )
@@ -89,10 +89,8 @@ function FeaturedCard({ project }: { project: Project }) {
           className="relative overflow-hidden border-l border-border max-[720px]:border-l-0 max-[720px]:border-t max-[720px]:aspect-video flex items-center justify-center bg-secondary"
           style={{ flex: '0 0 40%' }}
         >
-          <div className="transition-transform duration-500 group-hover:scale-[1.03] w-full h-full flex items-center justify-center min-h-[240px]">
-            <span className="text-[13px] text-muted-foreground tracking-[0.04em]">
-              {project.label}
-            </span>
+          <div className="relative transition-transform duration-500 group-hover:scale-[1.03] w-full h-full flex items-center justify-center min-h-[240px]">
+            <ProjectPreview project={project} />
           </div>
           {/* Featured badge */}
           <span className="absolute top-3 right-3 text-[10px] px-2 py-1 bg-foreground text-background tracking-widest uppercase">

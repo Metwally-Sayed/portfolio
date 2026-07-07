@@ -10,9 +10,49 @@ import { dict, pick, useLocale } from '@/lib/i18n'
 
 function Tag({ children }: { children: string }) {
   return (
-    <span className="text-[10px] py-[2px] px-[7px] border border-border rounded-[6px] text-muted-foreground font-mono">
+    <span className="text-[10px] py-[2px] px-[7px] border border-border rounded-[6px] text-muted-foreground font-mono transition-colors duration-150 hover:border-foreground hover:text-foreground">
       [{children}]
     </span>
+  )
+}
+
+const GRAIN = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\")"
+
+export function PreviewMonogram({ label }: { label: string }) {
+  const initials = label
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join('')
+    .toUpperCase()
+
+  return (
+    <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 select-none opacity-[0.05] mix-blend-overlay"
+        style={{ backgroundImage: GRAIN, backgroundSize: '200px 200px' }}
+      />
+      <span
+        aria-hidden
+        className="select-none font-semibold tracking-[-0.04em] text-foreground/[0.06] leading-none"
+        style={{ fontSize: 'clamp(64px, 13vw, 148px)' }}
+      >
+        {initials}
+      </span>
+    </div>
+  )
+}
+
+export function ProjectPreview({ project }: { project: Project }) {
+  return (
+    <>
+      <PreviewMonogram label={project.label} />
+      <span className="relative text-[13px] text-muted-foreground tracking-[0.04em]">
+        {project.label}
+      </span>
+    </>
   )
 }
 
@@ -67,11 +107,9 @@ export function ProjectCard({ project }: { project: Project }) {
   const { locale } = useLocale()
   const t = dict[locale]
   return (
-    <article className="border border-border rounded-[10px] overflow-hidden bg-card flex flex-col transition-all duration-[250ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] hover:border-foreground hover:-translate-y-1 h-full">
-      <div className="aspect-video border-b border-border relative overflow-hidden flex items-center justify-center bg-muted">
-        <span className="text-[13px] text-muted-foreground tracking-[0.04em]">
-          {project.label}
-        </span>
+    <article className="group border border-border rounded-[10px] overflow-hidden bg-card flex flex-col transition-all duration-[250ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] hover:border-foreground hover:-translate-y-1 h-full">
+      <div className="aspect-video border-b border-border relative overflow-hidden flex items-center justify-center bg-muted transition-transform duration-500 group-hover:scale-[1.02]">
+        <ProjectPreview project={project} />
       </div>
 
       <div className="p-5 flex flex-col flex-1">

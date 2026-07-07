@@ -9,6 +9,7 @@ import { dict, useLocale } from '@/lib/i18n'
 
 const navItems = [
   { href: '#about' },
+  { href: '#offers' },
   { href: '#experience' },
   { href: '#projects' },
   { href: '#skills' },
@@ -36,7 +37,7 @@ export function Header() {
       onToggle: (self) => setScrolled(self.isActive),
     })
 
-    const sections = ['about', 'experience', 'projects', 'skills', 'contact']
+    const sections = ['about', 'offers', 'experience', 'projects', 'skills', 'contact']
     sections.forEach((id) => {
       const el = document.getElementById(id)
       if (!el) return

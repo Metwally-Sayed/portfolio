@@ -9,7 +9,7 @@ import { dict, skillGroupAr, useLocale } from '@/lib/i18n'
 
 function Tag({ children }: { children: string }) {
   return (
-    <span className="skill-tag text-[10px] py-[2px] px-[7px] border border-border rounded-[6px] text-muted-foreground">
+    <span className="skill-tag text-[10px] py-[2px] px-[7px] border border-border rounded-[6px] text-muted-foreground transition-colors duration-150 hover:border-foreground hover:text-foreground">
       [{children}]
     </span>
   )

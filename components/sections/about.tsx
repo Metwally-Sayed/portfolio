@@ -83,6 +83,9 @@ export function About() {
               <FadeIn delay={200} direction="up">
                 <p>{t.about.p3}</p>
               </FadeIn>
+              <FadeIn delay={300} direction="up">
+                <p>{t.about.p4}</p>
+              </FadeIn>
             </div>
           </div>
         </div>
