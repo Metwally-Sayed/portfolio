@@ -9,7 +9,7 @@ import { dict, skillGroupAr, useLocale } from '@/lib/i18n'
 
 function Tag({ children }: { children: string }) {
   return (
-    <span className="skill-tag text-[10px] py-[2px] px-[7px] border border-border rounded-[6px] text-muted-foreground transition-colors duration-150 hover:border-foreground hover:text-foreground">
+    <span className="skill-tag text-[11px] py-[2px] px-[7px] border border-border rounded-[6px] text-muted-foreground transition-colors duration-150 hover:border-foreground hover:text-foreground">
       [{children}]
     </span>
   )
@@ -66,14 +66,14 @@ export function Skills() {
         <FadeIn>
           <div className="flex items-baseline justify-between mb-10 gap-4 flex-wrap">
             <div>
-              <div className="text-[11px] tracking-[0.08em] uppercase text-muted-foreground">
+              <div className="text-[12px] tracking-[0.08em] uppercase text-muted-foreground">
                 <EncryptedText text={t.skills.kicker} />
               </div>
               <h2 className="text-[32px] font-semibold tracking-[-0.02em] mt-0">
                 <EncryptedText text={t.skills.title} />
               </h2>
             </div>
-            <p className="text-muted-foreground text-[13px] max-w-[380px]">
+            <p className="text-muted-foreground text-[15px] max-w-[380px]">
               {t.skills.subtitle}
             </p>
           </div>
@@ -82,7 +82,7 @@ export function Skills() {
         <div ref={containerRef}>
           {skillGroups.map(([cat, items]) => (
             <div key={cat} className="skill-row grid grid-cols-[200px_1fr] gap-6 py-4 border-t border-border last:border-b last:border-border max-[720px]:grid-cols-1 max-[720px]:gap-2">
-              <div className="text-[11px] tracking-[0.06em] text-muted-foreground uppercase pt-1">
+              <div className="text-[12px] tracking-[0.06em] text-muted-foreground uppercase pt-1">
                 {locale === 'ar' ? (skillGroupAr[cat] ?? cat) : cat}
               </div>
               <div className="flex gap-[6px] flex-wrap">

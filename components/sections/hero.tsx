@@ -93,18 +93,18 @@ export function Hero() {
           </span>
         </div>
 
-        <h1 className="text-[clamp(34px,9.5vw,112px)] font-semibold tracking-[-0.03em] leading-[0.92] text-foreground">
-          <div className="overflow-hidden">
+        <h1 className="text-[clamp(34px,9.5vw,112px)] font-semibold tracking-[-0.03em] leading-[0.92] rtl:leading-[1.25] text-foreground">
+          <div className="overflow-hidden pb-[0.1em]">
             <div ref={name1InnerRef} style={{ transform: 'translateY(110%)' }}>
               {t.hero.h1a}
             </div>
           </div>
-          <div className="overflow-hidden">
+          <div className="overflow-hidden pb-[0.1em]">
             <div ref={name2InnerRef} style={{ transform: 'translateY(110%)' }}>
               {t.hero.h1b}
             </div>
           </div>
-          <span className="block mt-3 text-[clamp(20px,4vw,52px)] leading-[1.08] tracking-[-0.02em]">
+          <span className="block mt-3 text-[clamp(20px,4vw,52px)] leading-[1.18] rtl:leading-[1.4] tracking-[-0.02em]">
             {t.hero.tagline}
           </span>
         </h1>
@@ -115,11 +115,11 @@ export function Hero() {
           style={{ transform: 'scaleX(0)', transformOrigin: 'left' }}
         />
 
-        <p ref={roleRef} className="mt-5 text-[10px] tracking-[0.1em] uppercase text-muted-foreground">
+        <p ref={roleRef} className="mt-5 text-[11px] tracking-[0.1em] uppercase text-muted-foreground">
           <EncryptedText text={t.hero.role} revealDelayMs={80} />
         </p>
 
-        <p ref={descRef} className="mt-[18px] text-[13px] text-muted-foreground max-w-[480px] leading-[1.65]">
+        <p ref={descRef} className="mt-[18px] text-[15px] text-muted-foreground max-w-[480px] leading-[1.65]">
           {t.hero.desc}
         </p>
 

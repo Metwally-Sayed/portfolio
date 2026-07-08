@@ -11,7 +11,7 @@ function Block({ title, items }: { title: string; items: string[] }) {
       </h2>
       <ul className="flex flex-col gap-3">
         {items.map((item) => (
-          <li key={item} className="text-sm text-muted-foreground leading-[1.7] pl-4 relative">
+          <li key={item} className="text-[15px] text-muted-foreground leading-[1.7] pl-4 relative">
             <span className="absolute left-0">–</span>
             {item}
           </li>
@@ -34,17 +34,17 @@ export function CaseStudyView({
         ← projects
       </Link>
 
-      <div className="text-[10px] text-muted-foreground tracking-[0.06em] uppercase mt-10">
+      <div className="text-[11px] text-muted-foreground tracking-[0.06em] uppercase mt-10">
         {project.year} / {project.kind}
       </div>
       <h1 className="text-3xl font-semibold tracking-tight mt-2">{project.name}</h1>
-      {study.role && <p className="text-sm text-muted-foreground mt-1">{study.role}</p>}
+      {study.role && <p className="text-[15px] text-muted-foreground mt-1">{study.role}</p>}
 
       <div className="flex gap-2 flex-wrap mt-5">
         {project.tags.map((t) => (
           <span
             key={t}
-            className="text-[10px] py-[2px] px-[7px] border border-border rounded-[6px] text-muted-foreground"
+            className="text-[11px] py-[2px] px-[7px] border border-border rounded-[6px] text-muted-foreground"
           >
             [{t}]
           </span>
@@ -52,7 +52,7 @@ export function CaseStudyView({
       </div>
 
       {study.context && (
-        <p className="text-sm leading-[1.7] mt-10">{study.context}</p>
+        <p className="text-[15px] leading-[1.7] mt-10">{study.context}</p>
       )}
 
       <Block title="Challenges" items={study.challenges} />

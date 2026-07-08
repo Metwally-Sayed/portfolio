@@ -57,7 +57,7 @@ export function About() {
           <FadeIn>
             <div className="flex items-baseline justify-between mb-10 gap-4 flex-wrap">
               <div>
-                <div className="text-[11px] tracking-[0.08em] uppercase text-muted-foreground">
+                <div className="text-[12px] tracking-[0.08em] uppercase text-muted-foreground">
                   <EncryptedText text={t.about.kicker} />
                 </div>
                 <h2 className="text-[32px] font-semibold tracking-[-0.02em] mt-0">
@@ -69,11 +69,11 @@ export function About() {
 
           <div className="grid grid-cols-[1fr_2fr] gap-14 max-[720px]:grid-cols-1 max-[720px]:gap-6">
             <FadeIn delay={0} direction="up">
-              <div className="text-[11px] tracking-[0.08em] uppercase text-muted-foreground pt-1">
+              <div className="text-[12px] tracking-[0.08em] uppercase text-muted-foreground pt-1">
                 {t.about.im}
               </div>
             </FadeIn>
-            <div className="space-y-[14px] text-sm text-muted-foreground leading-[1.75]">
+            <div className="space-y-[14px] text-[15px] text-muted-foreground leading-[1.75] max-w-[65ch]">
               <FadeIn delay={0} direction="up">
                 <p>{t.about.p1}</p>
               </FadeIn>
@@ -97,7 +97,7 @@ export function About() {
             {stats.map(({ value, label, labelAr }, i) => (
               <div
                 key={label}
-                className="py-[18px] px-5 border-l border-border first:border-l-0 first:pl-0 max-[720px]:[&:nth-child(odd)]:border-l-0 max-[720px]:[&:nth-child(odd)]:pl-0"
+                className="py-[18px] px-5 border-s border-border first:border-s-0 first:ps-0 max-[720px]:[&:nth-child(odd)]:border-s-0 max-[720px]:[&:nth-child(odd)]:ps-0"
               >
                 <div
                   ref={el => {
@@ -107,7 +107,7 @@ export function About() {
                 >
                   {value}
                 </div>
-                <div className="text-[11px] text-muted-foreground tracking-[0.04em] mt-[10px]">
+                <div className="text-[12px] text-muted-foreground tracking-[0.04em] mt-[10px]">
                   {pick(locale, label, labelAr)}
                 </div>
               </div>

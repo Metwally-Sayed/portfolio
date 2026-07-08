@@ -60,13 +60,13 @@ export function Experience() {
       <div className="mx-auto max-w-[1100px] px-6">
         <FadeIn>
           <div className="mx-auto mb-14 max-w-[680px] text-center">
-            <div className="text-[11px] tracking-[0.08em] uppercase text-muted-foreground">
+            <div className="text-[12px] tracking-[0.08em] uppercase text-muted-foreground">
               <EncryptedText text={t.experience.kicker} />
             </div>
             <h2 className="mt-2 text-[clamp(30px,5vw,48px)] font-semibold tracking-[-0.02em] leading-[1.05]">
               <EncryptedText text={t.experience.title} />
             </h2>
-            <p className="mx-auto mt-4 max-w-[520px] text-[13px] leading-[1.7] text-muted-foreground">
+            <p className="mx-auto mt-4 max-w-[520px] text-[15px] leading-[1.7] text-muted-foreground">
               {t.experience.subtitle}
             </p>
           </div>
@@ -76,7 +76,7 @@ export function Experience() {
           <div
             ref={lineRef}
             aria-hidden
-            className="absolute left-[220px] top-0 h-full w-px origin-top bg-border max-[760px]:left-3"
+            className="absolute start-[220px] top-0 h-full w-px origin-top bg-border max-[760px]:start-3"
           />
 
           {resume.experience.map((exp, i) => (
@@ -89,7 +89,7 @@ export function Experience() {
             >
               <div className="pt-7 max-[760px]:hidden">
                 <div className="sticky top-24">
-                  <div className="text-[11px] text-muted-foreground tracking-[0.06em] uppercase">
+                  <div className="text-[12px] text-muted-foreground tracking-[0.06em] uppercase">
                     {pick(locale, exp.period, exp.periodAr)}
                   </div>
                   <div className="mt-2 text-[12px] text-muted-foreground">{pick(locale, exp.location, exp.locationAr)}</div>
@@ -102,7 +102,7 @@ export function Experience() {
 
               <div className="min-w-0">
                 <div className="rounded-[10px] border border-border bg-card p-6 transition-colors duration-200 hover:border-foreground max-[520px]:p-5">
-                  <div className="mb-4 hidden text-[11px] tracking-[0.06em] uppercase text-muted-foreground max-[760px]:block">
+                  <div className="mb-4 hidden text-[12px] tracking-[0.06em] uppercase text-muted-foreground max-[760px]:block">
                     {pick(locale, exp.period, exp.periodAr)} · {pick(locale, exp.location, exp.locationAr)}
                   </div>
 
@@ -111,9 +111,9 @@ export function Experience() {
                       <h3 className="text-[24px] font-semibold tracking-[-0.02em] leading-[1.12] max-[520px]:text-[21px]">
                         {exp.company}
                       </h3>
-                      <p className="mt-2 text-[13px] text-muted-foreground">{pick(locale, exp.role, exp.roleAr)}</p>
+                      <p className="mt-2 text-[15px] text-muted-foreground">{pick(locale, exp.role, exp.roleAr)}</p>
                     </div>
-                    <div className="text-right text-[10px] uppercase tracking-[0.08em] text-muted-foreground max-[620px]:text-left">
+                    <div className="text-right text-[11px] uppercase tracking-[0.08em] text-muted-foreground max-[620px]:text-left">
                       {t.experience.milestone} {String(i + 1).padStart(2, '0')}
                     </div>
                   </div>
@@ -122,9 +122,9 @@ export function Experience() {
                     {(locale === 'ar' ? exp.pointsAr : exp.points).map((point) => (
                       <li
                         key={point}
-                        className="relative pl-4 text-[13px] leading-[1.65] text-muted-foreground"
+                        className="relative ps-4 text-[15px] leading-[1.65] text-muted-foreground"
                       >
-                        <span className="absolute left-0 top-[0.75em] h-1 w-1 rounded-full bg-foreground" />
+                        <span className="absolute start-0 top-[0.75em] h-1 w-1 rounded-full bg-foreground" />
                         {point}
                       </li>
                     ))}

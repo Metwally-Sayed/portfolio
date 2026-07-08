@@ -11,7 +11,7 @@ import { dict, pick, useLocale } from '@/lib/i18n'
 
 function Tag({ children }: { children: string }) {
   return (
-    <span className="text-[10px] py-[2px] px-[7px] border border-border rounded-[6px] text-muted-foreground font-mono transition-colors duration-150 hover:border-foreground hover:text-foreground">
+    <span className="text-[11px] py-[2px] px-[7px] border border-border rounded-[6px] text-muted-foreground font-mono transition-colors duration-150 hover:border-foreground hover:text-foreground">
       [{children}]
     </span>
   )
@@ -26,7 +26,7 @@ function FeaturedCard({ project }: { project: Project }) {
         {/* Left side — 60% */}
         <div className="flex flex-col justify-between p-7 max-[720px]:p-5" style={{ flex: '0 0 60%' }}>
           <div>
-            <div className="text-[10px] text-muted-foreground tracking-[0.06em] uppercase mb-3">
+            <div className="text-[11px] text-muted-foreground tracking-[0.06em] uppercase mb-3">
               {project.year} / {pick(locale, project.kind, project.kindAr)}
             </div>
             <div className="text-[40px] font-semibold tracking-[-0.02em] leading-[1.1]">
@@ -37,7 +37,7 @@ function FeaturedCard({ project }: { project: Project }) {
                 {project.stats}
               </div>
             )}
-            <div className="text-[13px] text-muted-foreground leading-[1.65] mt-4">
+            <div className="text-[15px] text-muted-foreground leading-[1.65] mt-4">
               {pick(locale, project.desc, project.descAr)}
             </div>
           </div>
@@ -55,7 +55,7 @@ function FeaturedCard({ project }: { project: Project }) {
                   href={project.live}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-[11px] text-foreground inline-flex items-center gap-1 hover:underline underline-offset-4"
+                  className="text-[12px] text-foreground inline-flex items-center gap-1 hover:underline underline-offset-4"
                 >
                   {t.projects.viewLive} <ArrowUpRight size={12} />
                 </a>
@@ -65,7 +65,7 @@ function FeaturedCard({ project }: { project: Project }) {
                   href={project.appStore}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-[11px] text-foreground inline-flex items-center gap-1 hover:underline underline-offset-4"
+                  className="text-[12px] text-foreground inline-flex items-center gap-1 hover:underline underline-offset-4"
                 >
                   {t.projects.appStore} <ArrowUpRight size={12} />
                 </a>
@@ -75,7 +75,7 @@ function FeaturedCard({ project }: { project: Project }) {
                   href={project.playStore}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-[11px] text-foreground inline-flex items-center gap-1 hover:underline underline-offset-4"
+                  className="text-[12px] text-foreground inline-flex items-center gap-1 hover:underline underline-offset-4"
                 >
                   {t.projects.playStore} <ArrowUpRight size={12} />
                 </a>
@@ -93,7 +93,7 @@ function FeaturedCard({ project }: { project: Project }) {
             <ProjectPreview project={project} />
           </div>
           {/* Featured badge */}
-          <span className="absolute top-3 right-3 text-[10px] px-2 py-1 bg-foreground text-background tracking-widest uppercase">
+          <span className="absolute top-3 right-3 text-[11px] px-2 py-1 bg-foreground text-background tracking-widest uppercase">
             {t.projects.featured}
           </span>
         </div>
@@ -162,14 +162,14 @@ export function Projects() {
         {/* Section header */}
         <div className="flex items-baseline justify-between mb-10 gap-4 flex-wrap">
           <div>
-            <div className="text-[11px] tracking-[0.08em] uppercase text-muted-foreground">
+            <div className="text-[12px] tracking-[0.08em] uppercase text-muted-foreground">
               <EncryptedText text={t.projects.kicker} />
             </div>
             <h2 className="text-[32px] font-semibold tracking-[-0.02em] mt-0">
               <EncryptedText text={t.projects.title} />
             </h2>
           </div>
-          <p className="text-muted-foreground text-[13px] max-w-[380px]">
+          <p className="text-muted-foreground text-[15px] max-w-[380px]">
             {t.projects.subtitle}
           </p>
         </div>

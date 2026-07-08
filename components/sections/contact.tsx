@@ -98,7 +98,7 @@ export function Contact() {
         <div className="max-w-[1100px] mx-auto px-6">
           <div className="grid grid-cols-2 gap-14 items-start max-[720px]:grid-cols-1 max-[720px]:gap-6">
             <div>
-              <div className="text-[11px] tracking-[0.08em] uppercase text-muted-foreground">
+              <div className="text-[12px] tracking-[0.08em] uppercase text-muted-foreground">
                 <EncryptedText text={t.contact.kicker} />
               </div>
               <h2
@@ -126,10 +126,10 @@ export function Contact() {
                 const inner = (
                   <>
                     <Icon size={16} className="flex-none text-foreground" />
-                    <span className="text-[10px] text-muted-foreground tracking-[0.06em] uppercase flex-none w-20">
+                    <span className="text-[11px] text-muted-foreground tracking-[0.06em] uppercase flex-none w-20">
                       {displayLabel}
                     </span>
-                    <span className="text-[13px] flex-1 min-w-0 truncate">{displayValue}</span>
+                    <span className="text-[15px] flex-1 min-w-0 truncate">{displayValue}</span>
                     {href && (
                       <ArrowUpRight size={12} className="flex-none text-muted-foreground" />
                     )}
@@ -163,13 +163,13 @@ export function Contact() {
 
       <footer className="border-t border-border py-8">
         <div className="max-w-[1100px] mx-auto px-6 flex items-center justify-between gap-4 flex-wrap">
-          <span className="text-[11px] text-muted-foreground tracking-[0.04em]">
+          <span className="text-[12px] text-muted-foreground tracking-[0.04em]">
             {t.common.copyright}
           </span>
-          <span className="text-[11px] text-muted-foreground tracking-[0.04em]">
+          <span className="text-[12px] text-muted-foreground tracking-[0.04em]">
             {t.common.footerBuilt}
           </span>
-          <span className="text-[11px] text-muted-foreground tracking-[0.04em]">
+          <span className="text-[12px] text-muted-foreground tracking-[0.04em]">
             {t.common.footerThemePrefix}{' '}
             <kbd className="px-[6px] py-[1px] border border-border rounded-[4px] font-mono">
               d

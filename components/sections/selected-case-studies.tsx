@@ -7,7 +7,7 @@ import { dict, pick, useLocale } from '@/lib/i18n'
 
 function Tag({ children }: { children: string }) {
   return (
-    <span className="text-[10px] py-[2px] px-[7px] border border-border rounded-[6px] text-muted-foreground">
+    <span className="text-[11px] py-[2px] px-[7px] border border-border rounded-[6px] text-muted-foreground">
       [{children}]
     </span>
   )
@@ -22,14 +22,14 @@ export function SelectedCaseStudies() {
         <FadeIn>
           <div className="flex items-baseline justify-between mb-10 gap-4 flex-wrap">
             <div>
-              <div className="text-[11px] tracking-[0.08em] uppercase text-muted-foreground">
+              <div className="text-[12px] tracking-[0.08em] uppercase text-muted-foreground">
                 <EncryptedText text={t.caseStudies.kicker} />
               </div>
               <h2 className="text-[32px] font-semibold tracking-[-0.02em] mt-0">
                 <EncryptedText text={t.caseStudies.title} />
               </h2>
             </div>
-            <p className="text-muted-foreground text-[13px] max-w-[380px]">
+            <p className="text-muted-foreground text-[15px] max-w-[380px]">
               {t.caseStudies.subtitle}
             </p>
           </div>
@@ -45,26 +45,26 @@ export function SelectedCaseStudies() {
 
                 <dl className="mt-5 space-y-4">
                   <div>
-                    <dt className="text-[10px] tracking-[0.08em] uppercase text-muted-foreground">
+                    <dt className="text-[11px] tracking-[0.08em] uppercase text-muted-foreground">
                       {t.caseStudies.problem}
                     </dt>
-                    <dd className="mt-1 text-[13px] leading-[1.65] text-muted-foreground">
+                    <dd className="mt-1 text-[15px] leading-[1.65] text-muted-foreground">
                       {pick(locale, study.problem, study.problemAr)}
                     </dd>
                   </div>
                   <div>
-                    <dt className="text-[10px] tracking-[0.08em] uppercase text-muted-foreground">
+                    <dt className="text-[11px] tracking-[0.08em] uppercase text-muted-foreground">
                       {t.caseStudies.work}
                     </dt>
-                    <dd className="mt-1 text-[13px] leading-[1.65] text-muted-foreground">
+                    <dd className="mt-1 text-[15px] leading-[1.65] text-muted-foreground">
                       {pick(locale, study.work, study.workAr)}
                     </dd>
                   </div>
                   <div>
-                    <dt className="text-[10px] tracking-[0.08em] uppercase text-muted-foreground">
+                    <dt className="text-[11px] tracking-[0.08em] uppercase text-muted-foreground">
                       {t.caseStudies.impact}
                     </dt>
-                    <dd className="mt-1 text-[13px] leading-[1.65] text-foreground">
+                    <dd className="mt-1 text-[15px] leading-[1.65] text-foreground">
                       {pick(locale, study.impact, study.impactAr)}
                     </dd>
                   </div>

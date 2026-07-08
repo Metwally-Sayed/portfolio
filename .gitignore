@@ -37,3 +37,6 @@ next-env.d.ts
 
 # git worktrees
 .worktrees/
+
+# graphify (generated code graph)
+graphify-out/

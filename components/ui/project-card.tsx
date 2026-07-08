@@ -10,7 +10,7 @@ import { dict, pick, useLocale } from '@/lib/i18n'
 
 function Tag({ children }: { children: string }) {
   return (
-    <span className="text-[10px] py-[2px] px-[7px] border border-border rounded-[6px] text-muted-foreground font-mono transition-colors duration-150 hover:border-foreground hover:text-foreground">
+    <span className="text-[11px] py-[2px] px-[7px] border border-border rounded-[6px] text-muted-foreground font-mono transition-colors duration-150 hover:border-foreground hover:text-foreground">
       [{children}]
     </span>
   )
@@ -49,7 +49,7 @@ export function ProjectPreview({ project }: { project: Project }) {
   return (
     <>
       <PreviewMonogram label={project.label} />
-      <span className="relative text-[13px] text-muted-foreground tracking-[0.04em]">
+      <span className="relative text-[15px] text-muted-foreground tracking-[0.04em]">
         {project.label}
       </span>
     </>
@@ -93,7 +93,7 @@ function ProjectLink({
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="text-[11px] text-foreground inline-flex items-center gap-1 hover:underline underline-offset-4"
+      className="text-[12px] text-foreground inline-flex items-center gap-1 hover:underline underline-offset-4"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -113,13 +113,13 @@ export function ProjectCard({ project }: { project: Project }) {
       </div>
 
       <div className="p-5 flex flex-col flex-1">
-        <div className="text-[10px] text-muted-foreground tracking-[0.06em] uppercase">
+        <div className="text-[11px] text-muted-foreground tracking-[0.06em] uppercase">
           {project.year} / {pick(locale, project.kind, project.kindAr)}
         </div>
         <div className="text-[22px] font-semibold mt-[6px] tracking-[-0.01em]">
           {project.name}
         </div>
-        <div className="text-[13px] text-muted-foreground leading-[1.65] mt-[10px] flex-1">
+        <div className="text-[15px] text-muted-foreground leading-[1.65] mt-[10px] flex-1">
           {pick(locale, project.desc, project.descAr)}
         </div>
 
@@ -133,7 +133,7 @@ export function ProjectCard({ project }: { project: Project }) {
           {study && (
             <Link
               href={`/projects/${project.id}`}
-              className="text-[11px] text-foreground inline-flex items-center gap-1 hover:underline underline-offset-4"
+              className="text-[12px] text-foreground inline-flex items-center gap-1 hover:underline underline-offset-4"
             >
               {t.projects.readCase}
             </Link>

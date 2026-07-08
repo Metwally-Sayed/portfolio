@@ -85,10 +85,10 @@ export function Loader() {
       {/* Bottom: status + progress */}
       <div className="px-6 pb-8 space-y-3">
         <div className="flex items-center justify-between">
-          <span className="text-[10px] text-muted-foreground tracking-[0.12em] uppercase">
+          <span className="text-[11px] text-muted-foreground tracking-[0.12em] uppercase">
             {MESSAGES[msgIdx]}
           </span>
-          <span className="text-[10px] text-muted-foreground tracking-[0.08em] tabular-nums">
+          <span className="text-[11px] text-muted-foreground tracking-[0.08em] tabular-nums">
             {count}%
           </span>
         </div>
